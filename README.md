@@ -15,3 +15,6 @@ Prof. Marco
 
 Multiplicador
 
+
+![Ondas!](MultiplicadorBinário/Ondas.png)
+
