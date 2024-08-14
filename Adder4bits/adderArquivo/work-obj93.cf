@@ -1,7 +1,13 @@
 v 4
+file . "adder4bits_tb.vhdl" "ea306c0a27e45ca4bd2162e0fcf3317cfbc12c56" "20240814190507.476":
+  entity adder4bits_tb at 9( 179) + 0 on 33;
+  architecture adder4bits_tb_arquivo_arch of adder4bits_tb at 16( 291) + 0 on 34;
+file . "adder4bits_arquivo_tb.vhdl" "e76c608ba3df96fa09ceecbbee08cba10e8de63f" "20240814185931.631":
+  entity adder4bits_arquivo at 9( 179) + 0 on 21;
+  architecture adder4bits_tb_arquivo_arch of adder4bits_arquivo at 16( 301) + 0 on 22;
 file . "adder4bits_tb_arquivo_tb.vhdl" "95cc1a8b26525b5c10a65abc029f94fe596456d5" "20240812180402.212":
   entity testbench_arquivo at 9( 179) + 0 on 13;
   architecture adder4bits_tb_arquivo_arch of testbench_arquivo at 16( 299) + 0 on 14;
-file . "adder4bits.vhdl" "0bed6fc95a10cc0b6fb3131577de74571130bd31" "20240812180402.205":
-  entity adder4bits at 1( 0) + 0 on 11;
-  architecture adder4bits_arch of adder4bits at 13( 253) + 0 on 12;
+file . "adder4bits.vhdl" "0bed6fc95a10cc0b6fb3131577de74571130bd31" "20240814190507.468":
+  entity adder4bits at 1( 0) + 0 on 31;
+  architecture adder4bits_arch of adder4bits at 13( 253) + 0 on 32;
