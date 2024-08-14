@@ -1,0 +1,4 @@
+v 4
+file . "adder4bits_tb_arquivo_tb.vhdl" "dfec2957e23a824feeff044be785e75817e03477" "20240812180722.106":
+  entity adder4bits_arquivo at 9( 179) + 0 on 13;
+  architecture adder4bits_tb_arquivo_arch of adder4bits_arquivo at 16( 301) + 0 on 14;
