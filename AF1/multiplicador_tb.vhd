@@ -7,6 +7,7 @@
 
 library ieee;
 use ieee.numeric_bit.all;
+use std.textio.all;
 
 entity multiplicador_tb is
 end entity;
