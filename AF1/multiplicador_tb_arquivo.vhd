@@ -90,6 +90,7 @@ assert false report "Hora do pau" severity note;
 		    -- espera pelo termino da multiplicacao
 		wait until ready_out='1';
 		    -- verifica resultado
+		assert false report "ta na mesa" & integer'image(to_integer(unsigned(op1))) & " * " & integer'image(to_integer(unsigned(op2))) & " = " & integer'image(to_integer(unsigned(result_out))) severity note;
 
 		wait for clockPeriod; -- Aguarda a produção das saídas
 		--  Verifica as saidas
