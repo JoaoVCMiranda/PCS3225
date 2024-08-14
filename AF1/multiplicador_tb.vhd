@@ -52,7 +52,7 @@ begin
                 Reset=>   rst_in,
                 Start=>   start_in,
                 Va=>      va_in,
-                Vb=>      vb_in,
+Vb=>      vb_in,
                 Vresult=> result_out,
                 Ready=>   ready_out
       );
@@ -61,7 +61,11 @@ begin
   ---- Gera sinais de estimulo
   stimulus: process is
   begin
-assert false report "simulation start" severity note;
+assert false report "Hora do pau" severity note;
+  keep_simulating <= '1';
+
+  rst_in <= '1'; start_in <= '0';
+  wait for clockPeriod;
 
 
   ---- Leitura do arquivo
@@ -69,7 +73,6 @@ assert false report "simulation start" severity note;
 	  variable tb_line: line;
 	  variable space: character;
 	  variable op1, op2, produto_esperado: bit_vector(3 downto 0);
-	  variable carry_esperado: bit;
 	     
    begin
       while not endfile(tb_file) loop  -- Enquanto não chegar no final do arquivo ...
@@ -79,17 +82,21 @@ assert false report "simulation start" severity note;
          read(tb_line, op2);   -- Da linha que foi lida, lê o segundo parâmetro (op2)
          read(tb_line, space); -- Lê o próximo espaço usado como separador
          read(tb_line, produto_esperado);  -- Da linha que foi lida, lê o terceiro parâmetro (soma_esperada)
-         read(tb_line, space); -- Lê o próximo espaço usado como separador
-         read(tb_line, carry_esperado); -- Da linha que foi lida, lê o quarto parâmetro (carry_esperado)
 		 -- Agora que já lemos o caso de teste (par estímulo/saída esperada), vamos aplicar os sinais.
 		 a_in <= op1;
 		 b_in <= op2;
+
 		 wait for clockPeriod; -- Aguarda a produção das saídas
+		--  Verifica as saidas
+         	assert result_out = produto_esperado report "Erro no Produto " & integer'image(to_integer(unsigned(op1))) & " * " & integer'image(to_integer(unsigned(op2))) severity error;
+
 		 
 		---- FALTA FAZER OS CASOS TESTE
+	 
 
 
 	end loop;
+    assert false report "Teste concluido." severity note;	  
     wait; -- fim da simulação: aguarda indefinidamente
   end process;
 
