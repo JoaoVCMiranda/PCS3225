@@ -61,7 +61,7 @@ begin
   ---- Gera sinais de estimulo
   stimulus: process is
   ---- Leitura do arquivo
-  file tb_file : text open read_mode is "multiplicador_tb.dat";
+  file tb_file : text open read_mode is "multiplicador_tb.txt";
 	  variable tb_line: 		line;
 	  variable space: 		character;
 	  variable op1, op2 :		bit_vector(3 downto 0);
