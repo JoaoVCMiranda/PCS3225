@@ -68,7 +68,9 @@
       type tests_array is array (natural range <>) of test_multiplicador;
       constant tests: tests_array := (
 	("0011", "0110", "00010010"),
-        ("1111", "1011", "10100101"));
+        ("1111", "1011", "10100101"),
+        ("1111", "0000", "00000000"),
+        ("0001", "1011", "00001011"));
       
     begin
       
