@@ -51,18 +51,21 @@ Para fazer a leitura do arquivo externo `multiplicador_tb.dat`, nós
 A diferença é de quase 74 milhões de bytes.
 
 ### 3
-- O número de palavras é
-- Tamanho da palavra em bytes
-- E a capacidade é
+- O número de palavras é a quantidade de palavras armazenadas em um endereço de memória
+- Tamanho da palavra em bytes é a parte inteira do log (_base 2_) da palavra
+- E a capacidade é o produto do número de palavras e o tamanho da palavra(# de bits)
 
 ### 4
-Os principais sinais de controle de uma ROM são
+Os principais sinais de controle de uma ROM são apenas os sinais de endereço que identificam onde os dados estão localizados na memória
 
 ### 5
-Os principais sinais de controle de uma RAM são
+Os principais sinais de controle de uma RAM são, assim como na memória ROM, os sinais de endereço da memória contudo surge o sinal de R/W.
 
 ### 6 
-Duas diferenças entre SRAM e DRAM
+Duas diferenças entre SRAM(Static RAM) e DRAM(Dynamic RAM).
+A SRAM é feita com transistores, e como o nome indica, retêm a informação por mais tempo(até que a energia seja desligada) já a DRAM utiliza de um sistema de capacitores para armazenar os dados, mas como vimos em circuitos, existe uma "corrente de vazamento" que faz com que eles descarreguem alguns _ms_ depois de adquirir a informação. 
+Porém a DRAM é utilizada pois é mais barata de fazer.
+
 
 ### 7 
-É preciso fazer ciclos de _refresh_ na DRAM pois
+É preciso fazer ciclos de _refresh_ na DRAM pois os capacitores internos descarregam rapidamente e é preciso "recarregá-los"
