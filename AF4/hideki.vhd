@@ -1,6 +1,8 @@
 library IEEE;
 use ieee.numeric_bit.rising_edge;
 use ieee.numeric_bit.all;
+
+--deslocador15bits
 entity deslocador15 is
     port (
         clock   : in bit;
@@ -14,9 +16,13 @@ entity deslocador15 is
 end entity deslocador15;
  
 architecture mydeslocador15 of deslocador15 is
-    signal internal: bit_vector(14 downto 0);
+    
+    signal internal: bit_vector(14 downto 0) := (others => '0');
+    
     begin
+        saida <= internal;
         process(clock)
+        
         if (rising_edge(clock)) then
             if(limpa = '1') then internal <= (others => '0');
             elsif (carrega ='1') then internal <= dados;
@@ -25,9 +31,11 @@ architecture mydeslocador15 of deslocador15 is
             internal(14) <= entrada;
             end if;
         end if;
+        
         end process;
-    saida <= internal;
     end architecture;
+
+
 
 
         
@@ -58,5 +66,6 @@ architecture mydeslocador15 of deslocador15 is
                 if(internal = "1111") then fim <= '1';
                 end if;
             end if;
+            
          end process;
          end architecture; 
