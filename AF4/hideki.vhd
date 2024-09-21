@@ -59,5 +59,3 @@ architecture mydeslocador15 of deslocador15 is
             end if;
          end process;
          end architecture; 
-
-    entity
