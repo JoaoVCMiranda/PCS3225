@@ -46,7 +46,7 @@ begin
     end process;
 
     --comparador que gera NUL
-    NUL <= '1' when internal <= "000000000000000" else '0';
+    NUL <= '1' when internal = "000000000000000" else '0';
 end architecture;
 
 --fim do fluxo de dados
