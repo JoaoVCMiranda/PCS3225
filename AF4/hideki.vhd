@@ -26,7 +26,7 @@ architecture mydeslocador15 of deslocador15 is
             
         if (rising_edge(clock)) then
             if (limpa = '1') then internal <= (others => '0');
-            elsif (carrega ='1') then internal <= dados;
+            elsif (carrega = '1') then internal <= dados;
             elsif (desloca = '1') then 
                 internal(13 downto 0) <= internal(14 downto 1);
                 internal(14) <= entrada;
