@@ -66,6 +66,7 @@ architecture mydeslocador15 of deslocador15 is
                 elsif (conta = '1') then internal <= bit_vector(unsigned(internal) + 1);
                 end if;
                 if (internal = "1111") then fim <= '1';
+                    else fim <= '0';
                 end if;
             end if;
             
