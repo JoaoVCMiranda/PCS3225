@@ -5,7 +5,7 @@ use ieee.numeric_std.all;
 --fluxo de dados
 entity fd is
     port(
-        inport: in bit_vector(14 downto 0);
+        inport : in bit_vector(14 downto 0);
         outport : out bit_vector(3 downto 0);
         clock : in bit;
         Shift, EC, ED : in bit;
@@ -15,8 +15,20 @@ entity fd is
 end fd;
 
 architecture arch of fd is 
+
+    component adder
+    port (
+        A   : in  std_logic_vector(7 downto 0); -- Input A, 8 bits
+        B   : in  std_logic_vector(7 downto 0); -- Input B, 8 bits
+        SUM : out std_logic_vector(7 downto 0)  -- Output SUM, 8 bits
+    );
+    end component;
+
+    
     signal internal: bit_vector(14 downto 0);
     signal ocount: bit_vector(3 downto 0);
+
+
 begin
 
     LSB <= internal(0);
@@ -92,19 +104,22 @@ begin
 end architecture;
 
 --uart
-
 entity onescounter is
-    port(
-        inport : in bit_vector(14 downto 0);
-        done : out bit;
-        outport : out bit;
-        start, reset, clock : in bit
+port (
+    clock    : in bit;
+    reset    : in bit;
+    start    : in bit;
+    inport   : in bit_vector(14 downto 0);
+    outport  : out bit_vector(3 downto 0);
+    done     : out bit
     );
+end entity;
 
 end onescounter;
 architecture strutcture of onescounter is 
         --sinais internos de controle
         signal NUL, EC, ED, Shift : bit;
+    
         begin 
             fd: entity work.fd port map();
 
