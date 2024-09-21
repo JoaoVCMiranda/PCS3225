@@ -42,20 +42,22 @@ architecture mydeslocador15 of deslocador15 is
 
 
 
-    architecture mycontador4 of contador4 is
-    signal internal: bit_vector(3 downto 0);
+    architecture myContador4 of contador4 is
+        
+        signal internal : bit_vector(3 downto 0) := "0000";
+        
         begin 
+        Q <= internal;
         process(clock)
         begin
-            if(rising_edge (clock)) then
+            if(rising_edge(clock)) then
                 if(zera = '1') then internal <= "0000";
-                else(conta = '1') then internal <= bit_vector(unsinged(internal)+1);
+                elsif(conta = '1') then internal <= bit_vector(unsigned(internal) + 1);
                 end if;
-                if(internal = "1111") then fim <= '1'
+                if(internal = "1111") then fim <= '1';
                 end if;
             end if;
          end process;
-         Q <= internal;
          end architecture; 
 
     entity
