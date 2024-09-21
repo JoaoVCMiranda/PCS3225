@@ -10,7 +10,7 @@ entity fd is
         clock : in bit;
         Shift, EC, ED : in bit;
         NUL : out bit;
-        LSB : out bit;
+        LSB : out bit
     );
 end fd;
 
@@ -58,7 +58,7 @@ entity uc is
         ED, EC, Shift : out bit;
         NUL, LSB : in bit;
         clock, reset : in bit;
-        done : out bit;
+        done : out bit
     );
 end uc;
 
@@ -79,15 +79,15 @@ begin
                 present_state <= next_state;
             end if;        
     end process;
-
+--CHECAR LOGICA DE TRANSICAO DE ESTADO COM O NUL
     next_state <=
                 A when (present_state = A) and (start = '0') else
                 B when (present_state = A) and (start = '1') else
                 C when (present_state = B) else
                 D when (present_state = C) and (LSB = '1') else
                 E when (present_state = C) and (LSB = '0') else
-                C when (present_state = D) and () else
-                F when (present_state = E) and () else
+                C when (present_state = D) and (NUL = '0') else
+                F when (present_state = E) and (NUL = '1') else
                 A when (present_state = F);
 end architecture;
 
@@ -98,7 +98,7 @@ entity onescounter is
         inport : in bit_vector(14 downto 0);
         done : out bit;
         outport : out bit;
-        start, reset, clock : in bit;
+        start, reset, clock : in bit
     );
 
 end onescounter;
