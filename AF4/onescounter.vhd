@@ -41,27 +41,17 @@ architecture arch of fd is
     
     signal internal: bit_vector(14 downto 0) := dados;
     signal ocount: bit_vector(3 downto 0) := (others=>'0');
+    signal fimcont: bit := 0;
 
 begin
     LSB <= internal(0);
     NUL <= '1' when (internal = (others=>'0')) else '0';
-    outport <= ocount when NUL = '1' else "0000";
+    outport <= ocount when (NUL = '1' or fimcont = '1') else "0000";
 
-    XDesclocador: deslocador15 port map (clock, reset, , , '0', dados, internal); 
-    xContador: contador4 port map (clock, reset, LSB, ocount, );
-    
+    XDesclocador: deslocador15 port map (clock, reset, EC, ED, '0', dados, internal); 
+    xContador: contador4 port map (clock, reset, LSB, ocount, fimcont); --contador tem que contar depois do deslocador deslocar
 
-    --registrador Contador
-    process(clock) is
-    begin
-        if(clock'event and clock = '1') then
-            if(EC = '1')
-                ocount = bit_vector ((unsigned (ocount)) + "0001");
-            end if;
-        end if;
-    end process;
-
-end architecture;
+end architecture; 
 
 --fim do fluxo de dados
 
