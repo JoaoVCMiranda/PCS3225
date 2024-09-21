@@ -61,7 +61,7 @@ architecture mydeslocador15 of deslocador15 is
         process(clock)
         begin
             
-            if(rising_edge(clock)) then
+            if (rising_edge(clock)) then
                 if (zera = '1') then internal <= "0000";
                 elsif (conta = '1') then internal <= bit_vector(unsigned(internal) + 1);
                 end if;
