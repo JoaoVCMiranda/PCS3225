@@ -10,8 +10,7 @@ entity contador4 is
 end entity contador4;
     
 architecture mycontador4 of contador4 is
-	    signal internal: bit_vector(3 downto 0);
-	    internal <= "0000";
+	    signal internal: bit_vector(3 downto 0) := "0000";
 	    process(clock) is
 	    begin
 		if(clock'event and clock = '1') then
