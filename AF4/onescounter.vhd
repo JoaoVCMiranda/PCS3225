@@ -16,14 +16,17 @@ end fd;
 
 architecture arch of fd is 
 
-    component deslocador15
+    component deslocador15 is
     port (
-        A   : in  std_logic_vector(7 downto 0); -- Input A, 8 bits
-        B   : in  std_logic_vector(7 downto 0); -- Input B, 8 bits
-        SUM : out std_logic_vector(7 downto 0)  -- Output SUM, 8 bits
-    );
+        clock   : in bit;
+        limpa   : in bit;
+        carrega : in bit;
+        desloca : in bit;
+        entrada : in bit;
+        dados   : in bit_vector (14 downto 0);
+        saida   : out bit_vector (14 downto 0)
+    );    
     end component;
-
     
     signal internal: bit_vector(14 downto 0);
     signal ocount: bit_vector(3 downto 0);
