@@ -39,17 +39,16 @@ architecture arch of fd is
         );
     end component;
     
-    signal internal: bit_vector(14 downto 0);
-    signal ocount: bit_vector(3 downto 0);
+    signal internal: bit_vector(14 downto 0) := dados;
+    signal ocount: bit_vector(3 downto 0) := (others=>'0');
 
 begin
     LSB <= internal(0);
     NUL <= '1' when (internal = (others=>'0')) else '0';
     outport <= ocount when NUL = '1' else "0000";
-    internal <= dados;
 
-    XDesclocador: deslocador15 port map (clock, reset, 
-    
+    XDesclocador: deslocador15 port map (clock, reset, , , '0', dados, internal); 
+    xContador: contador4 port map (clock, reset, LSB, ocount, );
     
 
     --registrador Contador
