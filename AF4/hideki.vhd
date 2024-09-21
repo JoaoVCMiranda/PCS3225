@@ -42,7 +42,7 @@ architecture mydeslocador15 of deslocador15 is
 
 
 
-    architecture mycontador4 of contador4 is`
+    architecture mycontador4 of contador4 is
     signal internal: bit_vector(3 downto 0);
         begin 
         process(clock)
