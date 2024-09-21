@@ -16,7 +16,7 @@ end fd;
 
 architecture arch of fd is 
 
-    component adder
+    component deslocador15
     port (
         A   : in  std_logic_vector(7 downto 0); -- Input A, 8 bits
         B   : in  std_logic_vector(7 downto 0); -- Input B, 8 bits
