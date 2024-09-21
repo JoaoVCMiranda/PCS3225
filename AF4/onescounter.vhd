@@ -56,7 +56,7 @@ entity uc is
     port(
         start : in bit;
         ED, EC, Shift : out bit;
-        NUL : in bit;
+        NUL, LSB : in bit;
         clock, reset : in bit;
         done : out bit;
     );
@@ -86,7 +86,9 @@ begin
                 C when (present_state = B) else
                 D when (present_state = C) and (LSB = '1') else
                 E when (present_state = C) and (LSB = '0') else
-                C when (present_state = D) and 
+                C when (present_state = D) and () else
+                F when (present_state = E) and () else
+                A when (present_state = F);
 end architecture;
 
 --uart
