@@ -8,10 +8,8 @@ entity fd is
         inport : in bit_vector(14 downto 0);
         outport : out bit_vector(3 downto 0);
         clock : in bit;
-        shift, EC, ED : in bit;
-        reset : in bit;
-        NUL : out bit;
-        LSB : out bit
+        shift, EC, ED, reset : in bit;
+        NUL : out bit
     );
 end fd;
 
@@ -42,6 +40,7 @@ architecture arch of fd is
     signal internal: bit_vector(14 downto 0) := dados;
     signal ocount: bit_vector(3 downto 0) := (others=>'0');
     signal fimcont: bit := 0;
+    signal LSB: bit;
 
 begin
     LSB <= internal(0);
@@ -50,7 +49,6 @@ begin
 
     XDesclocador: deslocador15 port map (clock, reset, EC, ED, '0', dados, internal); 
     xContador: contador4 port map (clock, reset, LSB, ocount, fimcont); --contador tem que contar depois do deslocador deslocar
-
 end architecture; 
 
 --fim do fluxo de dados
@@ -72,8 +70,6 @@ architecture arch of uc is
     signal present_state, next_state : state_type;
 
 begin
-    
-    EC <= LSB;
     
     process (reset, clock) is
         begin
