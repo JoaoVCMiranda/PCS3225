@@ -18,7 +18,7 @@ architecture tb of onescounter_tb is
 		done  : out bit;
 		-- FD
 		inport  : in bit_vector(14 downto 0);
-		outport : out bit_vector(3 downto 0);
+		outport : out bit_vector(3 downto 0)
 	);
 	end component;
 
@@ -81,7 +81,7 @@ architecture tb of onescounter_tb is
 				wait until done='1';
 
 				assert out_sig = op report "Erro na contagem de " & inp_sig & " " & op severity error;
-			end loop
+			end loop;
 
 		assert false report "Sucesso!" severity note;
 		
