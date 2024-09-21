@@ -68,7 +68,9 @@ architecture arch of uc is
     signal present_state, next_state : state_type;
 
 begin
-
+    
+    EC <= LSB;
+    
     process (reset, clock) is
         begin
             if(reset = '1') then
@@ -81,7 +83,10 @@ begin
     next_state <=
                 A when (present_state = A) and (start = '0') else
                 B when (present_state = A) and (start = '1') else
-                C when (present_state = B) and ()
+                C when (present_state = B) else
+                D when (present_state = C) and (LSB = '1') else
+                E when (present_state = C) and (LSB = '0') else
+                C when (present_state = D) and 
 end architecture;
 
 --uart
