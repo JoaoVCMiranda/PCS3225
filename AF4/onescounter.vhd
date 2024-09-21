@@ -8,7 +8,8 @@ entity fd is
         inport : in bit_vector(14 downto 0);
         outport : out bit_vector(3 downto 0);
         clock : in bit;
-        Shift, EC, ED : in bit;
+        shift, EC, ED : in bit;
+        reset : in bit;
         NUL : out bit;
         LSB : out bit
     );
@@ -27,28 +28,29 @@ architecture arch of fd is
         saida   : out bit_vector (14 downto 0)
     );    
     end component;
+
+    component contador4 is
+        port (
+            clock : in bit;
+            zera  : in bit;
+            conta : in bit;
+            Q     : out bit_vector(3 downto 0);
+            fim   : out bit
+        );
+    end component;
     
     signal internal: bit_vector(14 downto 0);
     signal ocount: bit_vector(3 downto 0);
 
-
 begin
-
     LSB <= internal(0);
-
+    NUL <= '1' when (internal = (others=>'0')) else '0';
     outport <= ocount when NUL = '1' else "0000";
+    internal <= dados;
+
+    XDesclocador: deslocador15 port map (clock, reset, 
     
-    --registrador Deslocador
-    process(clock) is
-    begin
-        if(clock'event and clock = '1') then
-            if(ED = '1') then
-                internal <= (inport);
-            elsif(Shift = '1') then
-                internal <= ('0' & internal(14 downto 1));
-            end if;
-        end if;
-    end process;
+    
 
     --registrador Contador
     process(clock) is
@@ -60,8 +62,6 @@ begin
         end if;
     end process;
 
-    --comparador que gera NUL
-    NUL <= '1' when internal = "000000000000000" else '0';
 end architecture;
 
 --fim do fluxo de dados
