@@ -22,7 +22,8 @@ architecture mydeslocador15 of deslocador15 is
     begin
         saida <= internal;
         process(clock)
-        
+        begin
+            
         if (rising_edge(clock)) then
             if(limpa = '1') then internal <= (others => '0');
             elsif (carrega ='1') then internal <= dados;
@@ -59,6 +60,7 @@ architecture mydeslocador15 of deslocador15 is
         Q <= internal;
         process(clock)
         begin
+            
             if(rising_edge(clock)) then
                 if(zera = '1') then internal <= "0000";
                 elsif(conta = '1') then internal <= bit_vector(unsigned(internal) + 1);
