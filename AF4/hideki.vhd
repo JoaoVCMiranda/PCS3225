@@ -29,6 +29,9 @@ architecture mydeslocador15 of deslocador15 is
     saida <= internal;
     end architecture;
 
+
+        
+    --contador4bits
     entity contador4 is
         port (
             clock : in bit;
@@ -39,8 +42,6 @@ architecture mydeslocador15 of deslocador15 is
         );
     end entity contador4;
     
-
-
 
     architecture myContador4 of contador4 is
         
