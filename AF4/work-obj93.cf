@@ -1,0 +1,4 @@
+v 4
+file . "onescounter_tb.vhd" "57c5ba7dcc4b9e8c25cd66cdd44c86573f83b408" "20240922003009.905":
+  entity onescounter_tb at 1( 0) + 0 on 11;
+  architecture tb of onescounter_tb at 9( 120) + 0 on 12;

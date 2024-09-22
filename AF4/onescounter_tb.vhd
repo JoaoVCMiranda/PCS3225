@@ -80,7 +80,7 @@ architecture tb of onescounter_tb is
 				start_in <= '0';
 				wait until done_out='1';
 
-				assert out_sig = op report ("Erro na contagem de " & unsigned(inp_sig) & " " & image(unsigned(op)) severity error;
+				assert out_sig = op report "Erro na contagem de " & integer'image(to_integer(unsigned(op))) severity error;
 			end loop;
 
 		assert false report "Sucesso!" severity note;
