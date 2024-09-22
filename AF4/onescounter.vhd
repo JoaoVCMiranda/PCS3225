@@ -85,9 +85,11 @@ begin
                 C when (present_state = B) else
                 D when (present_state = C) and (LSB = '1') else
                 E when (present_state = C) and (LSB = '0') else
-                C when (present_state = D) and (NUL = '0') else
+                E when (present_state = D) else
+                C when (present_state = E) and (NUL = '0') else
                 F when (present_state = E) and (NUL = '1') else
                 A when (present_state = F);
+        
 end architecture;
 
 --uart
