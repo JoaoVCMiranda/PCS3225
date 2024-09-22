@@ -96,6 +96,7 @@ begin
              when A =>
                  done <= '0';
              when B =>
+                 shift <= '0';
                  load <= '1';
                  zera <= '1';
              when C =>
