@@ -44,7 +44,7 @@ architecture arch of fd is
 begin
     LSB <= internal(0);
     NUL <= '1' when (internal = (others=>'0') or fimcont = '1') else '0';
-    outport <= ocount when (NUL = '1' or fimcont = '1') else "0000";
+    outport <= ocount when NUL = '1' else "0000";
 
     XDesclocador: deslocador15 port map (clock, reset, load, shift, '0', dados, internal); 
     xContador: contador4 port map (clock, reset, LSB, ocount, fimcont); --contador tem que contar antes do deslocador deslocar
@@ -59,7 +59,7 @@ entity uc is
         load, shift : out bit;
         NUL, LSB : in bit;
         clock, reset : in bit;
-        done : out bit
+        done, resetFD : out bit
     );
 end uc;
 
@@ -89,7 +89,13 @@ begin
                 C when (present_state = E) and (NUL = '0') else
                 F when (present_state = E) and (NUL = '1') else
                 A when (present_state = F);
-        
+
+    process (current_state_
+    begin 
+        case current_state is
+             when A =>
+                 resetFD <= '1';
+                 
 end architecture;
 
 --uart
