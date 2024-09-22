@@ -116,7 +116,7 @@ begin
                  shift <= '1';
              when F =>
                  done <= '1';
-    end process;
+    end case;
 end architecture;
 
 --uart
