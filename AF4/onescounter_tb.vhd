@@ -53,7 +53,7 @@ architecture tb of onescounter_tb is
 		
 	papitations: process is
 		-- Leitura
-		file tb_file : text open read_mode is "casos_teste.txt";
+		file tb_file : text open read_mode is "sample.txt";
 			variable tb_line	:	line;
 			variable space		:	character;
 			variable ip		:	bit_vector(14 downto 0);
