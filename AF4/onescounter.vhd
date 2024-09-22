@@ -131,13 +131,31 @@ port (
     );
 end entity;
 
-end onescounter;
 architecture strutcture of onescounter is 
-        --sinais internos de controle
-        signal NUL, EC, ED, Shift : bit;
     
-        begin 
-            fd: entity work.fd port map();
+    component uc is
+    port(
+        start : in bit;
+        load, shift, conta : out bit;
+        NUL, LSB : in bit;
+        clock, reset : in bit;
+        done, zera, resetRG : out bit
+    );
+    end component;
 
-            uc: entity work.uc port map();
+    component fd is
+    port(
+        inport : in bit_vector(14 downto 0);
+        outport : out bit_vector(3 downto 0);
+        clock : in bit;
+        shift, load, resetRG, zera, conta : in bit;
+        NUL, LSB : out bit
+    );
+    end component;
+
+    signal shift, load, resetRG, zera, conta, NUL, LSB : bit;
+
+    begin 
+        Xfd: entity fd port map(inport, outport, clock, shift, load, resetRG, zera, conta, NUL, LSB);
+        Xuc: entity uc port map(start, load, shift, conta, NUL, LSB, clock, reset, done, zera, resetRG);
 end architecture;
