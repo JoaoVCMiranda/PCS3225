@@ -98,7 +98,7 @@ begin
                  load <= '0';
                  shift <= '0';
                  conta <= '0';
-                 zera <= '0';
+                 zera <= '1';
                  resetRG <= '1';
              when B =>
                  resetRG <= '0';
