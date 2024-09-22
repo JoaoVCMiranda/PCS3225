@@ -96,11 +96,19 @@ begin
              when A =>
                  done <= '0';
              when B =>
+                 conta <= '0';
                  load <= '1';
                  shift <= '0';
                  zera <= '0';
-             when D <=
+             when C <=
+                 shift <= '0';
+                 conta <= '0';
+             when D =>
                  conta <= '1';
+             when E =>
+                 shift <= '1';
+             when F =>
+                 done <= '1';
 end architecture;
 
 --uart
