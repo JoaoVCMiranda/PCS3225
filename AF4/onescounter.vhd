@@ -156,6 +156,6 @@ architecture strutcture of onescounter is
     signal shift, load, resetRG, zera, conta, NUL, LSB : bit;
 
     begin 
-        Xfd: entity fd port map(inport, outport, clock, shift, load, resetRG, zera, conta, NUL, LSB);
-        Xuc: entity uc port map(start, load, shift, conta, NUL, LSB, clock, reset, done, zera, resetRG);
+        Xfd: entity fd port map (inport, outport, clock, shift, load, resetRG, zera, conta, NUL, LSB);
+        Xuc: entity uc port map (start, load, shift, conta, NUL, LSB, clock, reset, done, zera, resetRG);
 end architecture;
