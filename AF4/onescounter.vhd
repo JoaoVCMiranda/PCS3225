@@ -56,7 +56,7 @@ end architecture;
 entity uc is
     port(
         start : in bit;
-        load, shift : out bit;
+        load, shift, conta : out bit;
         NUL, LSB : in bit;
         clock, reset : in bit;
         done, zera, resetRG : out bit
@@ -95,6 +95,10 @@ begin
         case current_state is
              when A =>
                  done <= '0';
+                 load <= '0';
+                 shift <= '0';
+                 conta <= '0';
+                 zera <= '0';
              when B =>
                  load <= '1';
                  zera <= '1';
