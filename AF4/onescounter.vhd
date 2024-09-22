@@ -8,7 +8,7 @@ entity fd is
         inport : in bit_vector(14 downto 0);
         outport : out bit_vector(3 downto 0);
         clock : in bit;
-        shift, load, reset : in bit;
+        shift, load, reset, zera, conta : in bit;
         NUL, LSB : out bit
     );
 end fd;
@@ -47,7 +47,7 @@ begin
     outport <= ocount when NUL = '1' else "0000";
 
     XDesclocador: deslocador15 port map (clock, reset, load, shift, '0', dados, internal); 
-    xContador: contador4 port map (clock, reset, LSB, ocount, fimcont); --contador tem que contar antes do deslocador deslocar
+    xContador: contador4 port map (clock, zera, conta, ocount, fimcont); --contador tem que contar antes do deslocador deslocar
 end architecture; 
 
 --fim do fluxo de dados
@@ -59,7 +59,7 @@ entity uc is
         load, shift : out bit;
         NUL, LSB : in bit;
         clock, reset : in bit;
-        done, resetFD : out bit
+        done, zera : out bit
     );
 end uc;
 
@@ -94,8 +94,13 @@ begin
     begin 
         case current_state is
              when A =>
-                 resetFD <= '1';
-                 
+                 done <= '0';
+             when B =>
+                 load <= '1';
+                 shift <= '0';
+                 zera <= '0';
+             when D <=
+                 conta <= '1';
 end architecture;
 
 --uart
