@@ -100,7 +100,7 @@ begin
                  load <= '1';
                  shift <= '0';
                  zera <= '0';
-             when C <=
+             when C =>
                  shift <= '0';
                  conta <= '0';
              when D =>
