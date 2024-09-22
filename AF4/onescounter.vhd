@@ -2,7 +2,6 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
---fluxo de dados
 entity fd is
     port(
         inport : in bit_vector(14 downto 0);
@@ -37,22 +36,21 @@ architecture arch of fd is
         );
     end component;
     
-    signal internal: bit_vector(14 downto 0) := dados;
+    signal internal: bit_vector(14 downto 0) := inport;
     signal ocount: bit_vector(3 downto 0) := (others=>'0');
-    signal fimcont: bit := 0;
+    signal nully : bit := '0';
+    signal fimcont: bit := '0';
 
 begin
     LSB <= internal(0);
-    NUL <= '1' when (internal = (others=>'0') or fimcont = '1') else '0';
-    outport <= ocount when NUL = '1' else "0000";
+    NUL <= '1' when (internal = "000000000000000" or fimcont = '1') else '0';
+    nully <= '1' when (internal = "000000000000000" or fimcont = '1') else '0';
+    outport <= ocount when nully = '1' else "0000";
 
-    XDesclocador: deslocador15 port map (clock, resetRG, load, shift, '0', dados, internal); 
+    XDesclocador: deslocador15 port map (clock, resetRG, load, shift, '0', inport, internal); 
     xContador: contador4 port map (clock, zera, conta, ocount, fimcont);
 end architecture; 
 
---fim do fluxo de dados
-
---unidade de controle
 entity uc is
     port(
         start : in bit;
@@ -78,7 +76,7 @@ begin
                 present_state <= next_state;
             end if;        
     end process;
---CHECAR LOGICA DE TRANSICAO DE ESTADO COM O NUL
+    
     next_state <=
                 A when (present_state = A) and (start = '0') else
                 B when (present_state = A) and (start = '1') else
@@ -90,9 +88,9 @@ begin
                 F when (present_state = E) and (NUL = '1') else
                 A when (present_state = F);
 
-    process (current_state) is
+    process (present_state) is
     begin 
-        case current_state is
+        case present_state is
              when A =>
                  done <= '0';
                  load <= '0';
@@ -117,9 +115,11 @@ begin
              when F =>
                  done <= '1';
     end case;
+    end process;
 end architecture;
 
---uart
+
+          
 entity onescounter is
 port (
     clock    : in bit;
@@ -156,6 +156,81 @@ architecture strutcture of onescounter is
     signal shift, load, resetRG, zera, conta, NUL, LSB : bit;
 
     begin 
-        Xfd: entity fd port map (inport, outport, clock, shift, load, resetRG, zera, conta, NUL, LSB);
-        Xuc: entity uc port map (start, load, shift, conta, NUL, LSB, clock, reset, done, zera, resetRG);
+        Xfd: fd port map (inport, outport, clock, shift, load, resetRG, zera, conta, NUL, LSB);
+        Xuc: uc port map (start, load, shift, conta, NUL, LSB, clock, reset, done, zera, resetRG);
 end architecture;
+      
+      
+library IEEE;
+use ieee.numeric_bit.rising_edge;
+use ieee.numeric_bit.all;
+
+
+entity deslocador15 is
+    port (
+        clock   : in bit;
+        limpa   : in bit;
+        carrega : in bit;
+        desloca : in bit;
+        entrada : in bit;
+        dados   : in bit_vector (14 downto 0);
+        saida   : out bit_vector (14 downto 0)
+    );    
+end entity deslocador15;
+ 
+architecture mydeslocador15 of deslocador15 is
+    
+    signal internal: bit_vector(14 downto 0) := (others => '0');
+    
+    begin
+        saida <= internal;
+        process(clock)
+        begin
+            
+        if (rising_edge(clock)) then
+            if (limpa = '1') then internal <= (others => '0');
+            elsif (carrega = '1') then internal <= dados;
+            elsif (desloca = '1') then 
+                internal(13 downto 0) <= internal(14 downto 1);
+                internal(14) <= entrada;
+            end if;
+        end if;
+      
+        end process;
+    end architecture;
+
+library IEEE;
+use ieee.numeric_bit.rising_edge;
+use ieee.numeric_bit.all;
+
+entity contador4 is
+    port (
+        clock : in bit;
+        zera  : in bit;
+        conta : in bit;
+        Q     : out bit_vector(3 downto 0);
+        fim   : out bit
+        );
+end entity contador4;
+
+
+architecture myContador4 of contador4 is
+
+    signal internal: bit_vector(3 downto 0) := "0000";
+
+    begin 
+    Q <= internal;
+    process(clock)
+    begin
+
+        if (rising_edge(clock)) then
+            if (zera = '1') then internal <= "0000";
+                elsif (conta = '1') then internal <= bit_vector(unsigned(internal) + 1);
+            end if;
+            if (internal = "1111") then fim <= '1';
+                else fim <= '0';
+             end if;
+        end if;
+
+     end process;
+end architecture;  
