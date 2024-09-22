@@ -99,7 +99,9 @@ begin
                  shift <= '0';
                  conta <= '0';
                  zera <= '0';
+                 resetRG <= '1';
              when B =>
+                 resetRG <= '0';
                  load <= '1';
                  zera <= '1';
              when C =>
