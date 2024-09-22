@@ -106,6 +106,7 @@ begin
              when D =>
                  conta <= '1';
              when E =>
+                 conta <= '0';
                  shift <= '1';
              when F =>
                  done <= '1';
