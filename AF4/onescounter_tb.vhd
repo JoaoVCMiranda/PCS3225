@@ -1,6 +1,6 @@
 library ieee;
 use ieee.numeric_bit.all;
-use ieee.textio.all;
+use std.textio.all;
 
 entity onescounter_tb is
 -- Entidade vazia tb
@@ -61,7 +61,7 @@ architecture tb of onescounter_tb is
 		begin 
 		-- assert false report "Vou passar cerol na mão" severity note;
 		
-		keep_simulating <= "1";
+		keep_simulating <= '1';
 		
 		while not endfile(tb_file) loop
 			readline(tb_file, tb_line);
@@ -75,12 +75,12 @@ architecture tb of onescounter_tb is
 
 				inp_sig <= ip;
 				wait until rising_edge(clk_in);
-				start <= "1";
+				start_in <= '1';
 				wait until rising_edge(clk_in);
-				start <= "0";
-				wait until done='1';
+				start_in <= '0';
+				wait until done_out='1';
 
-				assert out_sig = op report "Erro na contagem de " & inp_sig & " " & op severity error;
+				assert out_sig = op report ("Erro na contagem de " & unsigned(inp_sig) & " " & image(unsigned(op)) severity error;
 			end loop;
 
 		assert false report "Sucesso!" severity note;
