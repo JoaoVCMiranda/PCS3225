@@ -90,17 +90,17 @@ begin
                 F when (present_state = E) and (NUL = '1') else
                 A when (present_state = F);
 
-    process (current_state_
+    process (current_state) is
     begin 
         case current_state is
              when A =>
                  done <= '0';
              when B =>
-                 conta <= '0';
                  load <= '1';
-                 shift <= '0';
-                 zera <= '0';
+                 zera <= '1';
              when C =>
+                 load <= '0';
+                 zera <= '0';
                  shift <= '0';
                  conta <= '0';
              when D =>
@@ -109,6 +109,7 @@ begin
                  shift <= '1';
              when F =>
                  done <= '1';
+    end process;
 end architecture;
 
 --uart
