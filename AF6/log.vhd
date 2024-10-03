@@ -5,7 +5,7 @@ entity log is
 	port(
 		clock,inicio : in bit;
 		x : in bit_vector(7 downto 0 ) ;
-		R : in bit_vector(7 downto 0 ) ;
+		R : out bit_vector(7 downto 0 ) ;
 		fim : out bit
 	);
 end log;

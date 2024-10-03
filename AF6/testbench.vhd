@@ -13,15 +13,15 @@ architecture beh of testbench is
 		port(
 			clock,inicio : in bit;
 			x : in bit_vector(7 downto 0 );
-			R : in bit_vector(7 downto 0 );
+			R : out bit_vector(7 downto 0 );
 			fim : out bit
 		);
 	end component;
 	-- Signals
-	signal start 	: in bit;
-	signal EX 	: in bit_vector(7 downto 0 ) ;
-	signal AR 	: in bit_vector(7 downto 0 ) ;
-	signal ender 	: out bit
+	signal start 	: bit;
+	signal EX 	: bit_vector(7 downto 0 ) ;
+	signal AR 	: bit_vector(7 downto 0 ) ;
+	signal ender 	: bit
 
 	
 begin
@@ -40,7 +40,7 @@ begin
 	process
 	begin 
 		run <= 1;
-		
+			
 		run <= 0;
 		wait;
 	end process;
