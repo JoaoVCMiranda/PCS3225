@@ -43,7 +43,7 @@ begin
 		start <= '1';
 		EX <= "11110000";
 		wait until ender = '1';
-		assert (AR = "01001010") report "Erro detectado.";
+		assert (AR = "01001010") report "Erro detectado." severity error;
 		run <= 0;
 		wait;
 	end process;
