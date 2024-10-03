@@ -8,7 +8,7 @@ entity adder8 is
 	sum:       out bit_vector(7 downto 0);
 	carry_out: out bit
    );
-end adder4bits;
+end adder8;
 
 architecture adder8_arch of adder4bits is
    signal sum_c: bit_vector(8 downto 0);  -- sinal interno que captura o carry
