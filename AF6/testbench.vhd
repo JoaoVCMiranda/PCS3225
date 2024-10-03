@@ -40,7 +40,10 @@ begin
 	process
 	begin 
 		run <= 1;
-			
+		start <= '1';
+		EX <= "11110000";
+		wait until ender = '1';
+		assert (AR = "01001010") report "Erro detectado.";
 		run <= 0;
 		wait;
 	end process;
