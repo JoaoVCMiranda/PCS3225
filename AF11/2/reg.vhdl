@@ -17,7 +17,7 @@ entity reg is
 		d	: in bit_vector(wordSize-1 downto 0);
 		q	: out bit_vector(wordSize-1 downto 0)
 	    );
-end entity;
+end entity reg;
 
 architecture structural of reg is
 	signal interno  : bit_vector(wordSize-1 downto 0);
@@ -31,4 +31,4 @@ begin
 			interno <= d;
 		end if;
 	end process;
-end architecture;
+end architecture structural;
