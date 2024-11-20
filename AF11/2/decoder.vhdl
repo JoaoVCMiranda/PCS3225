@@ -11,11 +11,12 @@ end entity decoder;
 
 architecture structural of decoder is
 begin 
-	process(input)
-	begin
-		output <= (others => '0');
-		output(to_integer(unsigned(input))) <= '1';
-	end process;
+	--process(input)
+	--begin
+	-- Não precisa de process
+	output <= (others => '0');
+	output(to_integer(unsigned(input))) <= '1';
+	--end process;
 end architecture;
 
 

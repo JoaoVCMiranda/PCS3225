@@ -13,10 +13,6 @@ architecture structural of regfile_uc is
 begin
 	--- Logica de funcionamento 
 	--  Não fazer escrita no último registrador
-	if(wr="11111") then
-		enable <= '0';
-	else 
-		enable <= regWrite;
-	end if;
+	enable <= '0' when wr="11111" else regWrite;
 
 end architecture;
