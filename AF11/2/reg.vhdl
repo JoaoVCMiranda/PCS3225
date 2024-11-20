@@ -9,6 +9,7 @@ entity reg is
 	-- reg generic map(wordSize=>8) port map(...);
 	-- ou então assim
 	-- reg generic map(8) port map(...);
+	-- wordSize pode ser interpretado também como o número de flip-flops
 	generic (wordSize: natural :=4);
 	port(
 		clock 	: in bit;
