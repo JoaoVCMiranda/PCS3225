@@ -37,7 +37,24 @@ architecture structural of regfile is
 			q2 	: 	out bit_vector(63 downto 0)
 		    );
 	end component regfile_fd;
+	signal enable : bit;
 begin
+	RFILE_UC: regfile_uc
+	port map (
+		regWrite=>regWrite,
+		wr=>wr,
+		enable=>enable);
+	RFILE_FD: regfile_fd
+	port map (
+		clock=>clock,
+		reset=>reset, 
+		enable=>enable,
+		rr1=>rr1,
+		rr2=>rr2,
+		wr=>wr,
+		d=>d,
+		q1=>q1,
+		q2=>q2);
 	
 
 end architecture;

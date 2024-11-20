@@ -1,0 +1,4 @@
+v 4
+file . "regfile.vhdl" "7641c6dce164c6feea97c200aa1a327be4ee8691" "20241120165637.964":
+  entity regfile at 1( 0) + 0 on 11;
+  architecture structural of regfile at 18( 357) + 0 on 12;
