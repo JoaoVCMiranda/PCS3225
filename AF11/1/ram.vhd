@@ -4,7 +4,7 @@ use ieee.numeric_bit.all;
 entity ram_generic is
 	generic (
     	address_size   : natural := 5;
-        word_size      : natural := 8;
+        word_size      : natural := 8
     );
     port (
     	clk      : in  bit;
