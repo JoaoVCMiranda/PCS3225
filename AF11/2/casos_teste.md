@@ -4,6 +4,8 @@ Se esse parâmetro for omitido o arquivo `reg.vhdl` deve funcionar como um regis
 
 Assim, os casos testes sugeridos são:
 
+# Registrador (`reg.vhdl`)
+
 - Leitura antes de escrever qualquer coisa(não sei oq acontece)
 - Escrever valores e depois tentar lê-los
 
@@ -15,6 +17,7 @@ Assim, os casos testes sugeridos são:
 1000
 1111
 ```
+> Fazer os casos generalizados para palavras de 64 bits
 
 Para escrever colocar esses valores na entrada "d", definir enable='1' e esperar um ciclo de clock.
 
@@ -38,3 +41,18 @@ e os casos de teste sugeridos são:
 10000000
 11111111
 ```
+
+# Banco de Registradores (`regfile.vhdl`)
+
+- Escrita em um registrador por vez
+    - regWrite
+    - wr
+- Zerar o banco
+    - reset
+- Popular o regfile
+    - d
+    - wr
+- Fazer leituras simultaneas
+    > duas leituras ao mesmo tempo
+    - com base no que for populado
+    - fazer a leitura de 2 em 2
