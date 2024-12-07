@@ -23,7 +23,7 @@ architecture arch_mem_tb of mem_tb is
     component ram_generic
     generic (
     	address_size   : natural := 5;
-        word_size      : natural := 8;
+        word_size      : natural := 8
     );
     port (
     	clk      : in  bit;
@@ -32,7 +32,7 @@ architecture arch_mem_tb of mem_tb is
         data_in  : in  bit_vector (word_size - 1    downto 0);
         data_out : out bit_vector (word_size - 1    downto 0)
     );
-    end component ram;
+    end component ;
 ---------------------------------------------------------------------------
 ----------------------------SIGNALS----------------------------------------
 	signal 		clk   		: bit :='0';
