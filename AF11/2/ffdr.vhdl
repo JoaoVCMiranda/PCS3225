@@ -11,7 +11,7 @@ entity ffdr
 	-- port map da entidade
 	port( 
 		reset, en, clock : in bit;
-		q , q_n 	 : out bit;
+			q , q_n 	 : out bit
 	    );
 end entity;
 
