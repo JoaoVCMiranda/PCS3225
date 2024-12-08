@@ -1,29 +1,21 @@
--------------------------------------------------------
---! @file ffdr.vhdl
---! @brief flip flop D assyncronous reset, incomplete atribution
---! @author João (joaovictorcmiranda@usp.br)
---! @date 2024-11-15
--------------------------------------------------------
 library ieee;
-
 -- fazer entidade
 entity ffdr is
 	-- port map da entidade
 	port( 
 		reset, en, clock : in bit;
-			q , q_n 	 : out bit
-	    );
+		d			     : in bit;
+		q , q_n 	     : out bit
+	);
 end entity;
 
 -- Wrap this process with an architecture
-architecture estrutura of ffdr is
-	-- define the component 
-	-- deve ser exatamente igual à entidade inicial
-	component ffdr
-	
+architecture structure of ffdr is
+
+begin
 	-- Ideia de processo para o flip-flop
 	-- Atribuição incompleta 
-	ffdr: process(clock, reset)
+	process(clock, reset)
 	begin
 		if reset='1' then
 			q <= '0';
