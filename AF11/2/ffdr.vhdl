@@ -7,7 +7,7 @@
 library ieee;
 
 -- fazer entidade
-entity ffdr
+entity ffdr is
 	-- port map da entidade
 	port( 
 		reset, en, clock : in bit;
