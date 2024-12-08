@@ -100,12 +100,22 @@ begin
 		rr2 <= addresses(2*i+1);
 		
 
-		assert_q1(2*i) <= '1';
-		assert_q1 <= (others => '0');
-
-		assert_q2(2*i+1) <= '1';
-		assert_q2 <= (others => '0');
-
+		for j in 0 to 63 loop
+			if (j = 2*i)  then
+				assert_q1(j) <= '1';
+			else 
+				assert_q1(j) <=  '0';
+			end if;		
+		end loop;
+		
+		for j in 0 to 63 loop
+			if (j = 2*i+1)  then
+				assert_q2(j) <= '1';
+			else 
+				assert_q2(j) <=  '0';
+			end if;		
+		end loop;
+		
 		assert q1 = assert_q1 report "Leitura Q1 molhou" severity error;
 		assert q2 = assert_q2 report "Leitura Q2 molhou" severity error;
 	end loop;

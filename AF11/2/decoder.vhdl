@@ -10,13 +10,19 @@ entity decoder is
 end entity decoder;
 
 architecture structural of decoder is
+
 begin 
-	--process(input)
-	--begin
-	-- Não precisa de process
-	output <= (others => '0');
-	output(to_integer(unsigned(input))) <= '1';
-	--end process;
+	process is
+	begin
+		for i in 0 to n-1 loop
+			if (to_integer(unsigned(input)) = i)  then
+				output(i) <= '1';
+			else 
+				output(i) <=  '0';
+			end if;		
+		end loop;
+		wait;
+	end process;
 end architecture;
 
 
