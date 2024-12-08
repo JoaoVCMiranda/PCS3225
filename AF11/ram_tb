@@ -1,0 +1,69 @@
+library ieee;
+use ieee.numeric_bit.all;
+
+entity ram_tb is
+end entity;
+
+architecture tb_ram of ram_tb is
+    -- Constantes para tamanho do endereço e palavra
+    constant address_size : natural := 5;
+    constant word_size : natural := 8;
+
+    -- Sinais de entrada e saída
+    signal clk      : bit := '0';
+    signal wr       : bit := '0';
+    signal address  : bit_vector (address_size - 1 downto 0) := (others => '0');
+    signal data_in  : bit_vector (word_size - 1 downto 0) := (others => '0');
+    signal data_out : bit_vector (word_size - 1 downto 0);
+
+begin
+    -- Instância do DUT (Device Under Test)
+    DUT: entity work.ram_generic
+        generic map (
+            address_size, -- Tamanho do endereço
+            word_size     -- Tamanho da palavra
+        )
+        port map (
+            clk,          -- Clock
+            wr,           -- Escrita habilitada
+            address,      -- Endereço de leitura/escrita
+            data_in,      -- Dados de entrada
+            data_out      -- Dados de saída
+        );
+
+    -- Geração de clock
+    clock_process : process
+    begin
+        for i in 0 to 9 loop  -- Gera 10 ciclos de clock
+            clk <= '0';
+            wait for 10 ns;
+            clk <= '1';
+            wait for 10 ns;
+        end loop;
+        wait;  -- Finaliza a execução do processo
+    end process;
+
+    -- Teste de operações de escrita e leitura
+    stimulus_process : process
+    begin
+        -- Escreve o valor "10101010" no endereço "00001"
+        wr <= '1';                -- Habilita escrita
+        address <= "00001";       -- Endereço de escrita
+        data_in <= "10101010";    -- Dados a serem escritos
+        wait for 20 ns;           -- Aguarda a operação de escrita
+
+        -- Desabilita escrita e muda o endereço para leitura
+        wr <= '0';                -- Desabilita escrita
+        wait for 20 ns;           -- Aguarda estabilidade dos dados
+
+        -- Verifica a saída (espera que data_out seja "10101010")
+        assert data_out = "10101010"
+            report "Erro: leitura do endereço 00001 não retornou 10101010"
+            severity error;
+
+        -- Se tudo ocorrer bem
+        report "Sucesso." severity note;
+
+        wait;
+    end process;
+end architecture tb_ram;

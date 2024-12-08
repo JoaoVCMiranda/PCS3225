@@ -1,12 +1,10 @@
 library ieee;
 use ieee.numeric_bit.all;
-use std.textio.all;
 
 entity ram_generic is
 	generic (
     	address_size   : natural := 5;
-        word_size      : natural := 8;
-        data_file_name : string  := "ram32x8.dat"
+        word_size      : natural := 8
     );
     port (
     	clk      : in  bit;
@@ -18,11 +16,13 @@ entity ram_generic is
 end entity ram_generic;
     
 architecture arch_ram of ram_generic is
-  	constant depth : natural := 2 ** address_size;
+    
+    constant depth : natural := 2 ** address_size;
 
     type memory_type is array (0 to depth - 1) of bit_vector(word_size - 1 downto 0);
     signal memory : memory_type;
-
+    -- Inicializar a memória no 0
+    memory <= others => '0';
 begin
     process (clk)
     begin
