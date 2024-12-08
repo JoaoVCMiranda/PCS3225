@@ -1,0 +1,73 @@
+library ieee;
+use ieee.numeric_std.all;
+
+entity rom_tb is
+end rom_tb;
+
+architecture tb_rom_file of rom_tb is
+    signal clk     : bit := '0'; -- Sinal de clock
+    signal address : bit_vector(4 downto 0); 
+    signal data    : bit_vector(7 downto 0); 
+
+    function to_bit_vector_string(bv : bit_vector) return string is
+        variable result : string (bv'length downto 1);
+    begin
+        for i in 0 to bv'length-1 loop
+            if bv(i) = '1' then
+                result(i + 1) := '1';
+            else
+                result(i + 1) := '0';
+            end if;
+        end loop;
+        return result;
+    end function;
+
+begin
+    -- Instância do DUT (Device Under Test)
+    DUT: entity work.rom_generic
+        generic map (
+            5, 8, "32x8_INSTR.dat"
+        )
+        port map (
+            clk,       -- Clock mapeado
+            address,   -- Endereço
+            data       -- Dados
+        );
+
+    -- Geração de clock
+    clock_process : process
+    begin
+        while true loop
+            clk <= '0';
+            wait for 10 ns;
+            clk <= '1';
+            wait for 10 ns;
+        end loop;
+    end process;
+
+    -- Teste de leitura de endereços
+    stimulus_process : process
+    begin
+        address <= "00000";  -- Endereço 0
+        wait for 20 ns; 
+        report "Endereço 0 -> Dados: " & to_bit_vector_string(data);
+        
+        address <= "00001";  -- Endereço 1
+        wait for 20 ns;
+        report "Endereço 1 -> Dados: " & to_bit_vector_string(data);
+        
+        address <= "00010";  -- Endereço 2
+        wait for 20 ns;
+        report "Endereço 2 -> Dados: " & to_bit_vector_string(data);
+        
+        address <= "00011";  -- Endereço 3
+        wait for 20 ns;
+        report "Endereço 3 -> Dados: " & to_bit_vector_string(data);
+        
+        address <= "01111";  -- Endereço 15
+        wait for 20 ns;
+        report "Endereço 15 -> Dados: " & to_bit_vector_string(data);
+        
+        wait;
+    end process;
+end architecture tb_rom_file;
