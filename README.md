@@ -69,3 +69,5 @@ Porém a DRAM é utilizada pois é mais barata de fazer.
 
 ### 7 
 É preciso fazer ciclos de _refresh_ na DRAM pois os capacitores internos descarregam rapidamente e é preciso "recarregá-los"
+
+Teste de inserção
